@@ -1,0 +1,14 @@
+Bundle Path,Purpose
+01_Prototype_Template/Copy of SS-45 2025 AMR_Trend Plate_Master.xlsm,User visual/template reference and macro-enabled prototype.
+02_Control_Documents/2025_SS045_Appendix_D_Trend_Plate_Register.xlsx,Controls D-plate list wells COCs actions and statuses.
+02_Control_Documents/2025_SS045_Appendix_D_Cover_Memo_Working.docx,Appendix D plotting conventions and data-use rules.
+02_Control_Documents/2025_SS045_AMR_Client_Rules.docx,Formatting acronym standalone table and plate rules.
+02_Control_Documents/2025_SS045_AMR_Table_Figure_Appendix_Register.xlsx,Report component numbering and status register.
+03_AMR_Working_Tables/2025_SS045_AMR_Tables_1-1_to_5-1_Working.xlsx,Current AMR table logic for scope exceedances MNA and recommendations.
+04_Historical_Data/Intermediate MW Historical Data_2025.xlsx,Historical trend source data for shallow/intermediate wells.
+04_Historical_Data/Deep MW Historical Data_2025.xlsx,Historical trend source data for deep wells.
+04_Historical_Data/Deep MW Historical Data_2025.pdf,PDF support copy for deep historical data.
+04_Historical_Data/Precipitation Trend.xlsx,Precipitation/context data for secondary plots.
+05_Metadata_and_GIS/Attachment_1A_SWMU332_MW_Inspection_2025.pdf,Well metadata coordinates inspection status water levels.
+05_Metadata_and_GIS/2025_SS045_GIS_Input_Table_and_Figure_Request.xlsx,GIS/well metadata crosswalk and figure attributes.
+06_Data_Validation_Optional/app C - Data Verification and Usibility Report.zip,Optional qualifier/validation source for DUVR/DUSR notes.

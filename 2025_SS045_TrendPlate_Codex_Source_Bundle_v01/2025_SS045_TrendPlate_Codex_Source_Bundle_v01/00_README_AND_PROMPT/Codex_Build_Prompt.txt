@@ -1,0 +1,175 @@
+You are acting as an Excel/VBA workbook engineer and environmental data visualization specialist.
+
+Project: 2025 SS045 Annual Monitoring Report, former England AFB, Alexandria, Louisiana.
+
+Goal:
+Rebuild the SS045 trend plate workbook as a polished, production-ready, macro-enabled Excel workbook for 11x17 landscape trend plates. The workbook must be visually professional, Air Force-inspired, scientifically defensible, easy for a junior scientist to update next year, and suitable for inclusion in Appendix D of the 2025 AMR.
+
+Input files are provided in this source bundle.
+
+Workbook password, if needed for the user's prototype workbook:
+FPM
+
+Do not apply any password protection to the new workbook.
+
+Output file:
+04_Trend_Plates\2025_SS045_Trend_Plate_Master_v03_CodexBuild_Working.xlsm
+
+Primary requirements:
+
+1. Workbook architecture
+Create or rebuild the workbook with these sheets in this approximate order:
+00_README
+01_Config
+02_COC_BCT_CSLs
+03_Well_Metadata
+04_Data_Input_Long
+05_Field_MNA_Input
+06_Water_Level_Input
+07_Scope_Input
+08_Calc_Exceedances
+09_Calc_Trends
+10_Calc_MNA
+11_Executive_Dashboard
+12_Build_Control_Dashboard
+13_Plate_Data_Current
+14_Dynamic_Plate
+Plate_Template
+D-1_BH01MW02
+D-2_Well8
+D-3_Well25
+D-4_A39L014DP
+D-5_A39MW095
+D-6_SS45L001MW
+D-7_Well11
+D-8_Well13
+D-9_Well15
+D-10_Well17
+D-11_A39L028DP
+D-12_A39MW094
+D-13_SS45L002MW
+D-14_Well12
+D-15_Well14
+D-16_A39L036DPR2
+QAQC_Checklist
+
+2. Data architecture
+Use long-format data as the source of truth. Do not make the plates depend on manually edited per-well sheets. Use Excel Tables with stable names. Use formulas for calculations wherever practical. Use VBA only for synchronization, refresh, export, and QA tasks.
+
+Minimum tables:
+tblConfig
+tblCOCs
+tblWellMetadata
+tblDataLong
+tblFieldMNA
+tblWaterLevels
+tblScope
+tblPlateRegister
+tblExceedances
+tblTrends
+tblMNA
+tblQAQC
+
+3. Dynamic plate
+Create a dynamic 11x17 landscape plate on sheet 14_Dynamic_Plate.
+Add dropdown menus for Plate Number and Well ID.
+The dropdowns must stay synchronized: if the user changes Plate Number, update Well ID; if the user changes Well ID, update Plate Number. Use a simple Worksheet_Change macro for synchronization.
+The selected well should populate helper ranges on 13_Plate_Data_Current.
+All charts must reference fixed ranges on 13_Plate_Data_Current.
+Do not chart directly from FILTER spill ranges or volatile dynamic arrays.
+
+4. Charts must plot
+Every chart must display data when a valid well is selected. Use fixed helper ranges with #N/A for non-plotted values. Charts must update when the dropdown selection changes. Test at least D-1 BH01MW02, D-9 Well #15, D-12 A39MW094, and D-16 A39L036DPR2.
+
+5. Axis titles and chart formatting
+Axis titles must be actual Excel axis titles, not text boxes inside the plot area. Axis titles must appear outside the plot area.
+VOC chart:
+X-axis title: Date Sampled
+Y-axis title: Concentration (µg/L)
+Use true logarithmic y-axis where appropriate. Show BCT-CSL reference lines for relevant COCs. Label the 2025 result.
+Use open symbols or distinct formatting for nondetects if plotted. Do not connect nondetects as trend points unless the plotting convention explicitly says so.
+
+Water-level / precipitation chart:
+Use a secondary axis only if necessary. Keep it visually subordinate to the VOC chart.
+
+6. Mann-Kendall and trend logic
+Include Mann-Kendall only as a supporting metric. Do not force Mann-Kendall where the dataset is not valid.
+Use this rule:
+MK is evaluated only where there are at least four valid independent detected results for a compound/well combination.
+If not valid, display: MK: Not evaluated; insufficient detected results.
+
+Also calculate and display:
+Recent direction
+2025 vs. 2024 result
+2025 vs. historical peak
+Current BCT-CSL status
+Recommended 2026 action
+
+7. Dashboard requirements
+Create 11_Executive_Dashboard summarizing:
+Number of priority wells
+Number of wells with 2025 BCT-CSL exceedances
+Exceedances by site area
+Exceedances by COC
+Priority wells by 2026 action
+Trend classes
+MNA-support categories
+Data-use limitations
+
+Create 12_Build_Control_Dashboard summarizing:
+Missing data
+Missing well metadata
+Broken chart checks
+Dropdown status
+Plate completion status
+QA/QC status
+Export status
+Required next actions
+
+8. Static plates
+Create static plate sheets D-1 through D-16 using the same template and format as the dynamic plate. Each static plate should be 11x17 landscape, print-ready, and standalone. Each static plate should have plate number, well ID, title, page number, notes, acronyms/abbreviations, source statement, interpretive statement, and recommended 2026 action.
+
+9. Visual style
+Use an Air Force-inspired professional theme:
+Deep Air Force Blue #00308F
+Steel Blue #4F6D8A
+Light Blue Gray #E8F1FA
+Cool Gray #D9E1E8
+Dark Charcoal #1F2933
+Muted Gold #F2C94C
+Exceedance Red #C00000
+Below-BCT Green #2E7D32
+Do not overuse color. Use strong alignment, snapped boxes, consistent grids, uniform chart sizes, and consistent spacing. Use the full 11x17 landscape layout. All shapes, tables, and charts must be squared off, aligned, and evenly spaced.
+
+10. Standalone table rules
+Every table or table-like panel must include clear title, units, notes, acronyms/abbreviations, data-source statement where appropriate, and no undefined acronyms.
+
+11. Print/export setup
+Set each plate sheet to paper size 11x17, landscape, fit to 1 page wide by 1 page tall, print area covering the full plate layout, narrow but professional margins, and footer with page/plate identifier.
+Add VBA macros for:
+Refresh_Selected_Plate
+Build_All_Static_Plates
+Export_All_Plates_To_PDF
+Run_QAQC_Checks
+
+12. QA/QC requirements
+Before finishing, run checks for:
+Charts have valid series references
+Charts are not blank
+Axis titles are outside plot area
+All plates have a well ID
+All plates have a 2026 action
+All plates have notes/acronyms
+No #REF!, #VALUE!, #DIV/0!, or #NAME? errors in visible areas
+No missing BCT-CSL values for plotted COCs
+No missing 2025 result for priority wells unless documented
+Dropdown Plate Number and Well ID synchronize correctly
+
+13. Deliverables
+Save the final workbook as:
+04_Trend_Plates\2025_SS045_Trend_Plate_Master_v03_CodexBuild_Working.xlsm
+
+Also create:
+04_Trend_Plates\2025_SS045_Trend_Plate_Master_v03_QAQC_Log.txt
+
+In the QAQC log, summarize what was changed, how charts are sourced, how dropdowns work, whether MK is calculated or suppressed, which plates were tested, and any remaining issues.
